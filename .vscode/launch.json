@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Attach)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CardApplication<card>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "management.pokemon.card.CardApplication",
+            "projectName": "card",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

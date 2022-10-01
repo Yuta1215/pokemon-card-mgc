@@ -1,0 +1,62 @@
+version: '3.8'
+services:
+  app:
+    image: amazoncorretto:8-alpine
+    working_dir: /work
+    environment:
+      - AWS_REGION=ap-northeast-1
+      - AWS_ACCESS_KEY_ID=user
+      - AWS_SECRET_ACCESS_KEY=password
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    volumes:
+      - ./:/work
+      - app-repository:/root/.m2/repository
+    platform: linux/amd64
+    command: ./mvnw spring-boot:run -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
+  mysql:
+    build:
+      context: ./
+      dockerfile: ./docker/mysql/Dockerfile
+    platform: linux/amd64
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=management
+    volumes:
+      - mysql-store:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  dynamodb-local:
+    platform: linux/amd64
+    image: amazon/dynamodb-local:1.17.2
+    user: root
+    command: -jar DynamoDBLocal.jar -sharedDb -dbPath /data
+    ports:
+      - "8000:8000"
+    volumes:
+      - dynamodb-store:/data
+  dynamodb-admin:
+    platform: linux/amd64
+    image: aaronshaf/dynamodb-admin:4.4.0
+    environment:
+      - DYNAMO_ENDPOINT=dynamodb-local:8000
+      - AWS_REGION=ap-northeast-1
+      - AWS_ACCESS_KEY_ID=user
+      - AWS_SECRET_ACCESS_KEY=password
+    ports:
+      - "8001:8001"
+    depends_on:
+      - dynamodb-local
+volumes:
+  app-repository:
+    driver: local
+    name: card-app-repository
+  mysql-store:
+    driver: local
+    name: card-mysql-store
+  dynamodb-store:
+    driver: local
+    name: card-dynamodb-store

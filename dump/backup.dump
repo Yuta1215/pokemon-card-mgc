@@ -1,0 +1,275 @@
+-- MySQL dump 10.13  Distrib 8.0.29, for macos11.6 (arm64)
+--
+-- Host: 127.0.0.1    Database: sample
+-- ------------------------------------------------------
+-- Server version	5.7.39
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `dtb_pokemon_attr`
+--
+
+DROP TABLE IF EXISTS `dtb_pokemon_attr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dtb_pokemon_attr` (
+  `pokemon_card_id` bigint(20) unsigned NOT NULL,
+  `attribute_id` bigint(20) unsigned NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`pokemon_card_id`,`attribute_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dtb_pokemon_attr`
+--
+
+LOCK TABLES `dtb_pokemon_attr` WRITE;
+/*!40000 ALTER TABLE `dtb_pokemon_attr` DISABLE KEYS */;
+INSERT INTO `dtb_pokemon_attr` VALUES (1,2,'2022-09-29 13:54:14','2022-09-30 02:54:22');
+/*!40000 ALTER TABLE `dtb_pokemon_attr` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dtb_pokemon_skill`
+--
+
+DROP TABLE IF EXISTS `dtb_pokemon_skill`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dtb_pokemon_skill` (
+  `pokemon_card_id` bigint(20) unsigned NOT NULL,
+  `skill_id` bigint(20) unsigned NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`pokemon_card_id`,`skill_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dtb_pokemon_skill`
+--
+
+LOCK TABLES `dtb_pokemon_skill` WRITE;
+/*!40000 ALTER TABLE `dtb_pokemon_skill` DISABLE KEYS */;
+INSERT INTO `dtb_pokemon_skill` VALUES (1,1,'2022-09-29 13:54:03','2022-09-29 13:54:03'),(1,2,'2022-09-29 14:00:56','2022-09-29 14:00:56');
+/*!40000 ALTER TABLE `dtb_pokemon_skill` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dtb_skill_attr`
+--
+
+DROP TABLE IF EXISTS `dtb_skill_attr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dtb_skill_attr` (
+  `skill_id` bigint(20) unsigned NOT NULL,
+  `attribute_id` bigint(20) unsigned NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`skill_id`,`attribute_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dtb_skill_attr`
+--
+
+LOCK TABLES `dtb_skill_attr` WRITE;
+/*!40000 ALTER TABLE `dtb_skill_attr` DISABLE KEYS */;
+INSERT INTO `dtb_skill_attr` VALUES (1,2,'2022-09-30 03:07:09','2022-09-30 03:07:09'),(2,1,'2022-09-30 03:07:59','2022-09-30 03:07:59'),(2,2,'2022-09-30 03:07:59','2022-09-30 03:07:59');
+/*!40000 ALTER TABLE `dtb_skill_attr` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `dtb_user`
+--
+
+DROP TABLE IF EXISTS `dtb_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `dtb_user` (
+  `user_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `email` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `password` varchar(255) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `activation_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `delete_flag` bigint(20) unsigned DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email_index` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `dtb_user`
+--
+
+LOCK TABLES `dtb_user` WRITE;
+/*!40000 ALTER TABLE `dtb_user` DISABLE KEYS */;
+INSERT INTO `dtb_user` VALUES (1,'Yuta','y_nakamura@iret.co.jp','test','2022-01-01 00:00:00',0,'2022-09-29 13:46:59','2022-09-29 13:46:59');
+/*!40000 ALTER TABLE `dtb_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mst_attribute`
+--
+
+DROP TABLE IF EXISTS `mst_attribute`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mst_attribute` (
+  `attribute_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`attribute_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mst_attribute`
+--
+
+LOCK TABLES `mst_attribute` WRITE;
+/*!40000 ALTER TABLE `mst_attribute` DISABLE KEYS */;
+INSERT INTO `mst_attribute` VALUES (1,'ノーマル','2022-09-29 13:47:25','2022-09-30 02:30:48'),(2,'ほのお','2022-09-29 13:47:54','2022-09-30 02:30:54'),(3,'みず','2022-09-30 02:31:29','2022-09-30 02:31:29'),(4,'でんき','2022-09-30 02:31:29','2022-09-30 02:31:29'),(5,'くさ','2022-09-30 02:31:29','2022-09-30 02:31:29'),(6,'こおり','2022-09-30 02:31:29','2022-09-30 02:31:29'),(7,'かくとう','2022-09-30 02:31:29','2022-09-30 02:31:29'),(8,'どく','2022-09-30 02:31:29','2022-09-30 02:31:29'),(9,'じめん','2022-09-30 02:32:12','2022-09-30 02:32:12'),(10,'ひこう','2022-09-30 02:32:12','2022-09-30 02:32:12'),(11,'エスパー','2022-09-30 02:32:12','2022-09-30 02:32:12'),(12,'むし','2022-09-30 02:32:12','2022-09-30 02:32:12'),(13,'いわ','2022-09-30 02:32:12','2022-09-30 02:32:12'),(14,'ゴースト','2022-09-30 02:32:12','2022-09-30 02:32:12'),(15,'ドラゴン','2022-09-30 02:32:43','2022-09-30 02:32:43'),(16,'あく','2022-09-30 02:32:43','2022-09-30 02:32:43'),(17,'はがね','2022-09-30 02:32:43','2022-09-30 02:32:43'),(18,'フェアリー','2022-09-30 02:32:43','2022-09-30 02:32:43');
+/*!40000 ALTER TABLE `mst_attribute` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mst_card`
+--
+
+DROP TABLE IF EXISTS `mst_card`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mst_card` (
+  `card_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `name` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `image` varchar(100) COLLATE utf8mb4_bin DEFAULT '',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '1: ポケモンカード, 2: エネルギー, 3: トレーナーズ, 4: 特殊なカード',
+  `external_card_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `release_date` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`card_id`),
+  UNIQUE KEY `join_id_index` (`type`,`external_card_id`),
+  KEY `mst_card_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mst_card`
+--
+
+LOCK TABLES `mst_card` WRITE;
+/*!40000 ALTER TABLE `mst_card` DISABLE KEYS */;
+INSERT INTO `mst_card` VALUES (1,'ヒトカゲ','',1,1,'2022-09-30 02:41:34','2022-09-30 02:41:34','2022-09-30 02:41:43'),(2,'炎エネルギー','',2,1,'2022-09-30 02:42:03','2022-09-30 02:42:03','2022-09-30 02:42:06');
+/*!40000 ALTER TABLE `mst_card` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mst_energy_card`
+--
+
+DROP TABLE IF EXISTS `mst_energy_card`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mst_energy_card` (
+  `energy_card_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `attribute_id` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`energy_card_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mst_energy_card`
+--
+
+LOCK TABLES `mst_energy_card` WRITE;
+/*!40000 ALTER TABLE `mst_energy_card` DISABLE KEYS */;
+INSERT INTO `mst_energy_card` VALUES (1,1,'2022-09-30 02:38:43','2022-09-30 02:38:43');
+/*!40000 ALTER TABLE `mst_energy_card` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mst_pokemon_card`
+--
+
+DROP TABLE IF EXISTS `mst_pokemon_card`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mst_pokemon_card` (
+  `pokemon_card_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `hit_point` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `evolution_type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '0: たね',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`pokemon_card_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mst_pokemon_card`
+--
+
+LOCK TABLES `mst_pokemon_card` WRITE;
+/*!40000 ALTER TABLE `mst_pokemon_card` DISABLE KEYS */;
+INSERT INTO `mst_pokemon_card` VALUES (1,50,0,'2022-09-30 02:39:29','2022-09-30 02:39:29');
+/*!40000 ALTER TABLE `mst_pokemon_card` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mst_pokemon_skill`
+--
+
+DROP TABLE IF EXISTS `mst_pokemon_skill`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mst_pokemon_skill` (
+  `skill_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
+  `attack_point` smallint(5) unsigned DEFAULT '0',
+  `effect` varchar(255) COLLATE utf8mb4_bin DEFAULT '',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`skill_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mst_pokemon_skill`
+--
+
+LOCK TABLES `mst_pokemon_skill` WRITE;
+/*!40000 ALTER TABLE `mst_pokemon_skill` DISABLE KEYS */;
+INSERT INTO `mst_pokemon_skill` VALUES (1,'ひのこ',20,'','2022-09-29 13:53:13','2022-09-29 13:53:25'),(2,'しっぽをふる',10,'次のターンの開始時、相手の攻撃力を10下げる','2022-09-29 13:59:44','2022-09-30 03:07:38');
+/*!40000 ALTER TABLE `mst_pokemon_skill` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-09-30 12:22:44
