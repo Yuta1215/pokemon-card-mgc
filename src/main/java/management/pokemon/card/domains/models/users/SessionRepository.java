@@ -2,10 +2,13 @@ package management.pokemon.card.domains.models.users;
 
 import org.springframework.stereotype.Component;
 
-import lombok.Data;
+import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
-import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
@@ -26,13 +29,37 @@ public class SessionRepository {
     public String getItem() {
         try {
             // Create a DynamoDbTable object
-            DynamoDbTable<Session> mappedTable = this.dynamoDbEnhancedClient.table("SessionTable",
-                    TableSchema.fromBean(Session.class));
+            // DynamoDbTable<Session> mappedTable = this.dynamoDbEnhancedClient.table("SessionTable",
+            //         TableSchema.fromBean(Session.class));
+
+            // DynamoDbClient client = DynamoDbClient.builder()
+            //         .endpointOverride(URI.create("http://127.0.0.1:8000")).region(Region.AP_NORTHEAST_1).build();
+
+            AmazonDynamoDBClientBuilder builder = AmazonDynamoDBClientBuilder.standard();
+            EndpointConfiguration config = new EndpointConfiguration("http://127.0.0.1:8000", "ap-northeast-1");
+
+            builder.setEndpointConfiguration(config);
+            AmazonDynamoDB client = builder.build();
+
+            DynamoDBMapper mapper = new DynamoDBMapper(client);
+
+            /*/
+            Session2 tmp = new Session2();
+            tmp.setToken("aaaaaaaaa");
+            tmp.setValue("sample");
+            mapper.save(tmp);
+            */
+
+            Session2 result = mapper.load(Session2.class, "aaaaaaaaa");
+            System.out.println(result);
+            System.out.println(result.getToken());
+            System.out.println(result.getValue());
 
             // Create a KEY object
-            Key key = Key.builder()
-                    .partitionValue("aaaaaaaaa")
-                    .build();
+            /*
+            // Key key = Key.builder()
+            //         .partitionValue("aaaaaaaaa")
+            //         .build();
 
             // Get the item by using the key
             Object result = mappedTable.getItem(r -> r.key(key));
@@ -53,11 +80,12 @@ public class SessionRepository {
             class MySample {
                 private String id;
             }
-            MySample my_sample = new MySample();
-            my_sample.setId("sample");
-            System.out.println(my_sample);
-            System.out.println(my_sample.getClass());
-            System.out.println(my_sample instanceof MySample);
+            MySample mySample = new MySample();
+            mySample.setId("sample");
+            System.out.println(mySample);
+            System.out.println(mySample.getClass());
+            System.out.println(mySample instanceof MySample);
+            */
             return "";
 
         } catch (DynamoDbException e) {
