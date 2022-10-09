@@ -1,4 +1,4 @@
-package management.pokemon.card.domains.models.users;
+package management.pokemon.card.domain.models.users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
