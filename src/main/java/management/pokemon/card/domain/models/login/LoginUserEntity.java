@@ -17,4 +17,8 @@ public class LoginUserEntity {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "delete_flag")
+    private int deleteFlag;
+
 }

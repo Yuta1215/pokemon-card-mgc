@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ILoginUserRepository extends JpaRepository<LoginUserEntity, Integer> {
-  long countByEmailAndPassword(String email, String passowrd);
+  long countByEmailAndPasswordAndDeleteFlag(String email, String passowrd, int deleteFlag);
 }

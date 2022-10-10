@@ -22,8 +22,8 @@ public final class LoginApplicationService extends ApplicationServiceBase {
   }
 
   public LoginResponse handle(LoginRequestBody body) {
-    long result = this.loginUserRepository.countByEmailAndPassword(body.getEmail(), body.getPassword());
-    if (result > 1) {
+    long result = this.loginUserRepository.countByEmailAndPasswordAndDeleteFlag(body.getEmail(), body.getPassword(), 0);
+    if (result >= 1) {
       UUID uuid = UUID.randomUUID();
       String token = "t-" + uuid.toString();
     }
