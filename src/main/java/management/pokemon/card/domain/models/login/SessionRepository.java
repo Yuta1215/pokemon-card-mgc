@@ -1,11 +1,12 @@
 package management.pokemon.card.domain.models.login;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import management.pokemon.card.exception.aws.DynamoDBException;
 import management.pokemon.card.infrastructure.DynamoDB;
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException;
 
-@Component
+@Repository
 public class SessionRepository implements ISessionRepository {
 
     private DynamoDB dynamoDB;
@@ -14,11 +15,11 @@ public class SessionRepository implements ISessionRepository {
         this.dynamoDB = dynamoDB;
     }
 
-    public Session findByToken(String token) {
+    public Session findByToken(String token) throws DynamoDBException {
         try {
             return this.dynamoDB.getMapper().load(Session.class, token);
         } catch (DynamoDbException e) {
-            throw e;
+            throw new DynamoDBException();
         }
     }
 }

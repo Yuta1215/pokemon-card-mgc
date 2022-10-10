@@ -1,5 +1,10 @@
 package management.pokemon.card.application.shared;
 
+import org.springframework.stereotype.Service;
+
+import management.pokemon.card.domain.models.login.Session;
+
+@Service
 public interface IApplicationService {
-  public void setUserObject(String userObject);
+  public void setSession(Session session);
 }

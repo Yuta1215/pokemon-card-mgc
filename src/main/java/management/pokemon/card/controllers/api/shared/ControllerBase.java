@@ -5,23 +5,20 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import management.pokemon.card.domain.models.login.ISessionRepository;
+import management.pokemon.card.domain.models.login.Session;
 import management.pokemon.card.domain.models.validation.HeaderRequiredSpecification;
+import management.pokemon.card.domain.models.validation.SessionTokenService;
 
 @RequestMapping("/api")
 public abstract class ControllerBase {
   protected HttpServletRequest httpServletRequest;
 
   @Autowired
-  private ISessionRepository sessionRepository;
+  private SessionTokenService sessionTokenService;
 
-  protected void main() throws Exception {
-    this.validHeader();
-    this.sessionRepository.findByToken(this.httpServletRequest.getHeader("X-Session-Token"));
-  }
-
-  private void validHeader() throws Exception {
+  protected Session main() throws Exception {
     HeaderRequiredSpecification hrs = new HeaderRequiredSpecification(this.httpServletRequest);
     hrs.handle();
+    return this.sessionTokenService.handle(this.httpServletRequest.getHeader("X-Session-Token"));
   }
 }

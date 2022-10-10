@@ -25,7 +25,7 @@ public final class LoginController extends ControllerBase {
       HttpServletRequest httpServletRequest,
       @RequestBody LoginRequestBody loginRequestBody) throws Exception {
     this.httpServletRequest = httpServletRequest;
-    this.main();
+    this.loginApplicationService.setSession(this.main());
     return this.loginApplicationService.handle(loginRequestBody);
   }
 }

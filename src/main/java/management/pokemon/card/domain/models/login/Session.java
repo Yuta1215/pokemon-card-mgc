@@ -1,6 +1,7 @@
 package management.pokemon.card.domain.models.login;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBDocument;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
@@ -12,7 +13,7 @@ public class Session {
 
   private String token;
 
-  private String userObject;
+  private DynamoDBMap userObject;
 
   private int expiredAt;
 
@@ -24,7 +25,7 @@ public class Session {
   }
 
   @DynamoDBAttribute(attributeName = "UserObject")
-  public String getUserObject() {
+  public DynamoDBMap getUserObject() {
     return this.userObject;
   }
 
@@ -36,5 +37,22 @@ public class Session {
   @DynamoDBAttribute(attributeName = "Ttl")
   public int getTtl() {
     return this.ttl;
+  }
+
+  @Data
+  @DynamoDBDocument
+  public static class DynamoDBMap {
+    private int userId;
+    private String name;
+
+    @DynamoDBAttribute(attributeName = "user_id")
+    public int getUserId() {
+      return this.userId;
+    }
+
+    @DynamoDBAttribute(attributeName = "name")
+    public String getName() {
+      return this.name;
+    }
   }
 }
