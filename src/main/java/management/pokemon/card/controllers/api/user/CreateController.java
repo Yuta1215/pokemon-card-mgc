@@ -1,15 +1,13 @@
-package management.pokemon.card.presentation.controllers.user;
+package management.pokemon.card.controllers.api.user;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import management.pokemon.card.domain.models.login.SessionRepository;
 import management.pokemon.card.domain.models.users.IUserRepository;
-import management.pokemon.card.domain.models.users.SessionRepository;
-import management.pokemon.card.domain.models.users.UserEntity;
 
 @RestController
 final class CreateController {
@@ -32,17 +30,21 @@ final class CreateController {
         // String result = this.sessionRepository.getItem();
         // System.out.println(result);
         // List<Integer> sample = new ArrayList<>();
-        class A {}
-        class B extends A {}
+        class A {
+        }
+        class B extends A {
+        }
         class C extends B {
-            public void execute (List<? extends A> aList) {
+            public void execute(List<? extends A> aList) {
                 System.out.println(aList);
             }
-            public void handle (List<? super B> bList) {
+
+            public void handle(List<? super B> bList) {
                 System.out.println(bList);
             }
         }
-        class D {}
+        class D {
+        }
         List<A> la = new ArrayList<>();
         List<B> lb = new ArrayList<>();
         List<C> lc = new ArrayList<>();

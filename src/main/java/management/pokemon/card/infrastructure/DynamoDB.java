@@ -7,14 +7,14 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
-import management.pokemon.card.config.DynamoDB;
+import management.pokemon.card.config.DynamoDBConfig;
 
 @Component
 public class DynamoDB {
 
     private AmazonDynamoDB amazonDynamoDB;
 
-    public DynamoDB(DynamoDB dynamoDBConfig) {
+    public DynamoDB(DynamoDBConfig dynamoDBConfig) {
         AmazonDynamoDBClientBuilder builder = AmazonDynamoDBClientBuilder.standard();
         if (dynamoDBConfig.getEndpoint() != null) {
             EndpointConfiguration config = new EndpointConfiguration(dynamoDBConfig.getEndpoint(),

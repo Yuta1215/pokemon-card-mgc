@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Component
 @ConfigurationProperties(prefix = "dynamodb")
-public class DynamoDB {
+public class DynamoDBConfig {
     private String region;
     private String endpoint;
 }

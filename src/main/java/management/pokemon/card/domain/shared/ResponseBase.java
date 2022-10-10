@@ -1,8 +1,8 @@
 package management.pokemon.card.domain.shared;
 
-import org.springframework.stereotype.Component;
+import lombok.Getter;
 
-@Component
-public class ResponseBase {
-    protected int result = 0;
+@Getter
+public abstract class ResponseBase implements IResponse {
+  protected int result = 0;
 }
