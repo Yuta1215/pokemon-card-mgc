@@ -1,5 +1,7 @@
 package management.pokemon.card.application.login;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import management.pokemon.card.application.shared.ApplicationServiceBase;
@@ -21,7 +23,10 @@ public final class LoginApplicationService extends ApplicationServiceBase {
 
   public LoginResponse handle(LoginRequestBody body) {
     long result = this.loginUserRepository.countByEmailAndPassword(body.getEmail(), body.getPassword());
-    System.out.println(result);
+    if (result > 1) {
+      UUID uuid = UUID.randomUUID();
+      String token = "t-" + uuid.toString();
+    }
     return new LoginResponse("dummy");
   }
 

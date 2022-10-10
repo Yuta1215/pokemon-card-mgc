@@ -22,4 +22,12 @@ public class SessionRepository implements ISessionRepository {
             throw new DynamoDBException();
         }
     }
+
+    public void save(Session session) throws DynamoDBException {
+        try {
+            this.dynamoDB.getMapper().save(session);
+        } catch (DynamoDbException e) {
+            throw new DynamoDBException();
+        }
+    }
 }
